@@ -17,7 +17,7 @@ function NoticeScreen({
     <div className="flex min-h-dvh flex-col bg-paper">
       <SiteHeader />
       <main className="mx-auto flex w-full max-w-md flex-1 flex-col items-center justify-center px-6 pb-24 text-center">
-        <span className="flex size-14 items-center justify-center rounded-full border border-line bg-card text-ink-soft">
+        <span className="flex size-14 items-center justify-center border border-line bg-card text-ink-soft">
           {icon}
         </span>
         <h1 className="mt-5 font-display text-2xl font-semibold tracking-tight">
@@ -52,7 +52,7 @@ export function NetworkErrorScreen({ onRetry }: { onRetry: () => void }) {
         <button
           type="button"
           onClick={onRetry}
-          className="inline-flex min-h-12 items-center gap-2 rounded-xl bg-ink px-7 text-[15px] font-medium text-white transition active:scale-[0.98]"
+          className="inline-flex min-h-12 items-center gap-2 bg-bay px-7 text-[15px] font-medium text-white transition active:scale-[0.98]"
         >
           <RotateCw size={16} aria-hidden />
           Try again

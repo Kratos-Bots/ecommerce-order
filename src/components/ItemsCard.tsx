@@ -11,7 +11,7 @@ export function ItemsCard({
   currency: string
 }) {
   return (
-    <section className="rounded-2xl border border-line bg-card p-5">
+    <section className=" border border-line bg-card p-5">
       <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft">
         Items
       </p>
@@ -29,7 +29,7 @@ export function ItemsCard({
               <p className="mt-1 text-sm text-ink-soft">
                 {item.quantity} × {formatMoney(item.unitPrice, currency)}
                 {item.isPreorder && (
-                  <span className="ml-2 rounded-full bg-hay-soft px-2 py-0.5 text-[11px] font-medium text-hay">
+                  <span className="ml-2 bg-hay-soft px-2 py-0.5 text-[11px] font-medium text-hay">
                     Pre-order
                   </span>
                 )}
@@ -58,7 +58,7 @@ export function ItemsCard({
         {totals.discountAmount > 0 && (
           <div className="flex justify-between">
             <dt className="text-ink-soft">Discount</dt>
-            <dd className="tabular-nums text-moss">
+            <dd className="tabular-nums text-bay">
               −{formatMoney(totals.discountAmount, currency)}
             </dd>
           </div>

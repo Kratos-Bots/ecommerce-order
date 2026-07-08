@@ -16,7 +16,7 @@ export function StatusHero({ order }: { order: PublicOrder }) {
         {view.detail}
       </p>
       {order.isPreorder && !view.terminal && !view.done && (
-        <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-hay-soft px-3 py-1.5 text-xs font-medium text-hay">
+        <p className="mt-3 inline-flex items-center gap-1.5 bg-hay-soft px-3 py-1.5 text-xs font-medium text-hay">
           <Clock size={13} aria-hidden />
           Contains pre-order items
         </p>
@@ -55,26 +55,26 @@ function RouteProgress({
               <span
                 aria-hidden
                 className={`absolute top-7 bottom-1 left-[11px] border-l-2 border-dashed ${
-                  complete ? 'border-moss/45' : 'border-ink/15'
+                  complete ? 'border-bay/45' : 'border-ink/15'
                 }`}
               />
             )}
             {complete ? (
-              <span className="flex size-6 shrink-0 items-center justify-center rounded-full bg-moss text-white">
+              <span className="flex size-6 shrink-0 items-center justify-center bg-bay text-white">
                 <Check size={14} strokeWidth={3} aria-hidden />
               </span>
             ) : current ? (
               <span className="relative flex size-6 shrink-0 items-center justify-center">
                 <span
                   aria-hidden
-                  className="absolute inset-0 animate-ping rounded-full bg-ink/15 [animation-duration:2.2s] motion-reduce:hidden"
+                  className="absolute inset-0 animate-ping bg-bay/20 [animation-duration:2.2s] motion-reduce:hidden"
                 />
-                <span className="relative flex size-6 items-center justify-center rounded-full bg-ink">
-                  <span className="size-1.5 rounded-full bg-paper" />
+                <span className="relative flex size-6 items-center justify-center bg-bay">
+                  <span className="size-1.5 bg-paper" />
                 </span>
               </span>
             ) : (
-              <span className="size-6 shrink-0 rounded-full border-2 border-line bg-card" />
+              <span className="size-6 shrink-0 border-2 border-line bg-card" />
             )}
             <div className="flex min-w-0 items-center gap-2 pt-0.5">
               <span
@@ -89,7 +89,7 @@ function RouteProgress({
                 {label}
               </span>
               {current && partial && (
-                <span className="rounded-full bg-hay-soft px-2 py-0.5 text-[11px] font-medium text-hay">
+                <span className=" bg-hay-soft px-2 py-0.5 text-[11px] font-medium text-hay">
                   Partial
                 </span>
               )}
@@ -108,14 +108,14 @@ function TerminalNotice({ kind }: { kind: 'cancelled' | 'refunded' }) {
   const cancelled = kind === 'cancelled'
   return (
     <div
-      className={`mt-6 flex items-start gap-3 rounded-2xl border p-4 ${
+      className={`mt-6 flex items-start gap-3 border p-4 ${
         cancelled
           ? 'border-clay/25 bg-clay-soft'
           : 'border-line bg-card'
       }`}
     >
       <span
-        className={`mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full ${
+        className={`mt-0.5 flex size-8 shrink-0 items-center justify-center ${
           cancelled ? 'bg-clay/10 text-clay' : 'bg-paper text-ink-soft'
         }`}
       >

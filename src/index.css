@@ -1,16 +1,16 @@
 @import "tailwindcss";
 
 @theme {
-  /* Palette — "shipping label" system: green-black ink band, warm paper, moss progress */
+  /* Palette — "shipping label" system: navy band, warm paper, navy progress */
   --color-paper: #f1f0ea;
   --color-card: #ffffff;
-  --color-ink: #17211b;
-  --color-ink-soft: #5d675f;
-  --color-ink-faint: #98a19a;
-  --color-line: #e2e1d8;
-  --color-moss: #2f6b4f;
-  --color-moss-deep: #24513c;
-  --color-moss-soft: #e7efe9;
+  --color-ink: #182230;
+  --color-ink-soft: #5b6474;
+  --color-ink-faint: #97a0ad;
+  --color-line: #e1e0d8;
+  --color-bay: #0f3965;
+  --color-bay-deep: #0b2b4e;
+  --color-bay-soft: #e4eaf2;
   --color-hay: #8a6414;
   --color-hay-soft: #f5eddb;
   --color-clay: #9c3b2a;
@@ -35,6 +35,6 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid var(--color-moss);
+  outline: 2px solid var(--color-bay);
   outline-offset: 2px;
 }

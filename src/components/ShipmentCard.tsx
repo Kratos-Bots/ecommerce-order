@@ -11,9 +11,9 @@ const STATUS_LABEL: Record<ShipmentStatus, string> = {
 }
 
 const STATUS_PILL: Record<ShipmentStatus, string> = {
-  shipped: 'bg-moss-soft text-moss-deep',
-  in_transit: 'bg-moss-soft text-moss-deep',
-  delivered: 'bg-moss text-white',
+  shipped: 'bg-bay-soft text-bay-deep',
+  in_transit: 'bg-bay-soft text-bay-deep',
+  delivered: 'bg-bay text-white',
   returned: 'bg-clay-soft text-clay',
 }
 
@@ -40,7 +40,7 @@ export function ShipmentCard({
   }
 
   return (
-    <section className="rounded-2xl border border-line bg-card p-5">
+    <section className=" border border-line bg-card p-5">
       <div className="flex items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft">
@@ -51,7 +51,7 @@ export function ShipmentCard({
           </h2>
         </div>
         <span
-          className={`shrink-0 rounded-full px-2.5 py-1 text-xs font-medium ${STATUS_PILL[shipment.status]}`}
+          className={`shrink-0 px-2.5 py-1 text-xs font-medium ${STATUS_PILL[shipment.status]}`}
         >
           {STATUS_LABEL[shipment.status]}
         </span>
@@ -64,7 +64,7 @@ export function ShipmentCard({
       )}
 
       {shipment.trackingNumber && (
-        <div className="mt-4 flex items-center justify-between gap-2 rounded-xl border border-line bg-paper py-1 pr-1 pl-3.5">
+        <div className="mt-4 flex items-center justify-between gap-2 border border-line bg-paper py-1 pr-1 pl-3.5">
           <span className="truncate font-mono text-sm">
             {shipment.trackingNumber}
           </span>
@@ -74,10 +74,10 @@ export function ShipmentCard({
             aria-label={
               copied ? 'Tracking number copied' : 'Copy tracking number'
             }
-            className="flex size-11 shrink-0 items-center justify-center rounded-lg text-ink-soft transition hover:text-ink active:scale-95"
+            className="flex size-11 shrink-0 items-center justify-center text-ink-soft transition hover:text-ink active:scale-95"
           >
             {copied ? (
-              <Check size={17} className="text-moss" aria-hidden />
+              <Check size={17} className="text-bay" aria-hidden />
             ) : (
               <Copy size={17} aria-hidden />
             )}
@@ -90,7 +90,7 @@ export function ShipmentCard({
           href={shipment.trackingUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="mt-3 flex min-h-12 items-center justify-center gap-1.5 rounded-xl bg-ink text-[15px] font-medium text-white transition active:scale-[0.99]"
+          className="mt-3 flex min-h-12 items-center justify-center gap-1.5 bg-bay text-[15px] font-medium text-white transition active:scale-[0.99]"
         >
           Track package
           <ArrowUpRight size={17} aria-hidden />

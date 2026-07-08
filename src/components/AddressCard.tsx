@@ -11,7 +11,7 @@ export function AddressCard({ address }: { address: ShippingAddress }) {
   ].filter((line): line is string => Boolean(line))
 
   return (
-    <section className="rounded-2xl border border-line bg-card p-5">
+    <section className=" border border-line bg-card p-5">
       <p className="font-mono text-[11px] uppercase tracking-[0.22em] text-ink-soft">
         Delivery address
       </p>
