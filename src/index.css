@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  /* Palette — "shipping label" system: green-black ink band, warm paper, moss progress */
+  --color-paper: #f1f0ea;
+  --color-card: #ffffff;
+  --color-ink: #17211b;
+  --color-ink-soft: #5d675f;
+  --color-ink-faint: #98a19a;
+  --color-line: #e2e1d8;
+  --color-moss: #2f6b4f;
+  --color-moss-deep: #24513c;
+  --color-moss-soft: #e7efe9;
+  --color-hay: #8a6414;
+  --color-hay-soft: #f5eddb;
+  --color-clay: #9c3b2a;
+  --color-clay-soft: #f6ebe8;
+
+  --font-sans: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial, sans-serif;
+  --font-display: "Bricolage Grotesque", var(--font-sans);
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Consolas,
+    monospace;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-moss);
+  outline-offset: 2px;
+}
