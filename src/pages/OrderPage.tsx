@@ -72,6 +72,9 @@ export default function OrderPage() {
         : 'Order status'
   }, [state])
 
+  // `attempt` is a dependency so the timer re-arms even when a failed soft
+  // refresh leaves `state` untouched — otherwise one network hiccup would
+  // silently end the polling loop.
   useEffect(() => {
     if (state.phase !== 'ready') return
     const isChecking = state.order.cryptoPayments?.some(
@@ -86,7 +89,7 @@ export default function OrderPage() {
       stale = true
       clearTimeout(timer)
     }
-  }, [state, orderRef, accessKey])
+  }, [state, attempt, orderRef, accessKey])
 
   if (state.phase === 'loading') return <LoadingSkeleton />
   if (state.phase === 'invalid') return <InvalidLinkScreen />
