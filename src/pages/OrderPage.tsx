@@ -78,7 +78,7 @@ export default function OrderPage() {
   useEffect(() => {
     if (state.phase !== 'ready') return
     const isChecking = state.order.cryptoPayments?.some(
-      (cp) => cp.verificationStatus === 'checking',
+      (cp) => cp.paymentStatus === 'pending' && cp.verificationStatus === 'checking',
     )
     if (!isChecking) return
     let stale = false

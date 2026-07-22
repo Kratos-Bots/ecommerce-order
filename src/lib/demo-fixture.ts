@@ -37,6 +37,7 @@ const demoCryptoPayment: PublicCryptoPayment = {
   coinAmount: '43.61',
   fiatAmount: 43.44,
   verificationStatus: 'checking',
+  paymentStatus: 'pending',
   needsAttention: false,
   txidMasked: '0x9a3c…7f21',
 }

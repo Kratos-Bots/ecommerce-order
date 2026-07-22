@@ -43,6 +43,7 @@ export function CryptoPaymentCard({ orderRef, accessKey, payment, onSubmitted }:
   }
 
   const status = payment.verificationStatus
+  const paymentStatus = payment.paymentStatus
 
   return (
     <section className=" border border-line bg-card p-5">
@@ -50,7 +51,13 @@ export function CryptoPaymentCard({ orderRef, accessKey, payment, onSubmitted }:
         Pay with {payment.coinLabel} · {payment.networkLabel}
       </p>
 
-      {status === 'confirmed' ? (
+      {paymentStatus === 'completed' ? (
+        <p className="mt-3 flex items-center gap-2 bg-bay-soft p-3 text-sm text-bay-deep">
+          <CircleCheck className="size-4 shrink-0" aria-hidden /> Payment confirmed — thank you.
+        </p>
+      ) : paymentStatus === 'failed' || paymentStatus === 'refunded' ? (
+        <p className="mt-3 bg-clay/10 p-3 text-sm text-ink-soft">This payment is no longer active.</p>
+      ) : status === 'confirmed' ? (
         <p className="mt-3 flex items-center gap-2 bg-bay-soft p-3 text-sm text-bay-deep">
           <CircleCheck className="size-4 shrink-0" aria-hidden /> Payment confirmed — thank you.
         </p>

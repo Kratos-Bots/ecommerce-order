@@ -58,6 +58,7 @@ export interface PublicCryptoPayment {
   coinAmount: string
   fiatAmount: number
   verificationStatus: 'awaiting_txid' | 'checking' | 'confirmed' | 'needs_review'
+  paymentStatus: 'pending' | 'completed' | 'failed' | 'refunded'
   needsAttention: boolean
   txidMasked: string | null
 }
