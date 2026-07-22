@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useParams } from 'react-router'
 import { fetchPublicOrder, InvalidLinkError } from '@/lib/api.ts'
 import type { PublicOrder } from '@/lib/types.ts'
@@ -25,23 +25,40 @@ export default function OrderPage() {
   const { orderRef, accessKey } = useParams()
   const [state, setState] = useState<LoadState>({ phase: 'loading' })
   const [attempt, setAttempt] = useState(0)
+  const lastParamsRef = useRef<string | null>(null)
 
   useEffect(() => {
     if (!orderRef || !accessKey) {
       setState({ phase: 'invalid' })
       return
     }
+    // Param changes are a hard reset (new order); attempt bumps from the
+    // crypto poll / post-submit refresh are soft — keep a ready page
+    // mounted so in-progress card inputs aren't destroyed.
+    const paramsKey = `${orderRef}/${accessKey}`
+    const isNewParams = lastParamsRef.current !== paramsKey
+    const isSoftRefresh = !isNewParams && state.phase === 'ready'
+    if (isNewParams) {
+      lastParamsRef.current = paramsKey
+      setState({ phase: 'loading' })
+    } else {
+      setState((prev) => (prev.phase === 'ready' ? prev : { phase: 'loading' }))
+    }
     let stale = false
-    setState({ phase: 'loading' })
     fetchPublicOrder(orderRef, accessKey)
       .then((order) => {
         if (!stale) setState({ phase: 'ready', order })
       })
       .catch((error: unknown) => {
         if (stale) return
-        setState({
-          phase: error instanceof InvalidLinkError ? 'invalid' : 'error',
-        })
+        if (error instanceof InvalidLinkError) {
+          setState({ phase: 'invalid' })
+          return
+        }
+        // Background refresh failed: keep stale ready data on screen
+        // rather than blowing the page away; the next poll retries.
+        if (isSoftRefresh) return
+        setState({ phase: 'error' })
       })
     return () => {
       stale = true
