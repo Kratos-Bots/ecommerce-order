@@ -48,6 +48,20 @@ export interface Shipment {
   deliveredAt: string | null
 }
 
+export interface PublicCryptoPayment {
+  paymentId: number
+  coin: string
+  network: string
+  coinLabel: string
+  networkLabel: string
+  address: string
+  coinAmount: string
+  fiatAmount: number
+  verificationStatus: 'awaiting_txid' | 'checking' | 'confirmed' | 'needs_review'
+  needsAttention: boolean
+  txidMasked: string | null
+}
+
 export interface PublicOrder {
   reference: string
   status: OrderStatus
@@ -59,4 +73,5 @@ export interface PublicOrder {
   totals: OrderTotals
   shippingAddress: ShippingAddress | null
   shipments: Shipment[]
+  cryptoPayments?: PublicCryptoPayment[]
 }

@@ -5,6 +5,7 @@ import type { PublicOrder } from '@/lib/types.ts'
 import { SiteHeader } from '@/components/SiteHeader.tsx'
 import { SiteFooter } from '@/components/SiteFooter.tsx'
 import { StatusHero } from '@/components/StatusHero.tsx'
+import { CryptoPaymentCard } from '@/components/CryptoPaymentCard.tsx'
 import { ShipmentCard } from '@/components/ShipmentCard.tsx'
 import { ItemsCard } from '@/components/ItemsCard.tsx'
 import { AddressCard } from '@/components/AddressCard.tsx'
@@ -54,6 +55,22 @@ export default function OrderPage() {
         : 'Order status'
   }, [state])
 
+  useEffect(() => {
+    if (state.phase !== 'ready') return
+    const isChecking = state.order.cryptoPayments?.some(
+      (cp) => cp.verificationStatus === 'checking',
+    )
+    if (!isChecking) return
+    let stale = false
+    const timer = setTimeout(() => {
+      if (!stale) setAttempt((a) => a + 1)
+    }, 30_000)
+    return () => {
+      stale = true
+      clearTimeout(timer)
+    }
+  }, [state, orderRef, accessKey])
+
   if (state.phase === 'loading') return <LoadingSkeleton />
   if (state.phase === 'invalid') return <InvalidLinkScreen />
   if (state.phase === 'error')
@@ -66,6 +83,15 @@ export default function OrderPage() {
       <main className="mx-auto w-full max-w-md">
         <StatusHero order={order} />
         <div className="space-y-3 px-5 pt-8">
+          {order.cryptoPayments?.map((cp) => (
+            <CryptoPaymentCard
+              key={cp.paymentId}
+              orderRef={orderRef!}
+              accessKey={accessKey!}
+              payment={cp}
+              onSubmitted={() => setAttempt((a) => a + 1)}
+            />
+          ))}
           {order.shipments.map((shipment, i) => (
             <ShipmentCard
               key={i}

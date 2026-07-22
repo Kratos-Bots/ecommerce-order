@@ -8,7 +8,7 @@
 //   /DEMO01/delivered   /DEMO01/processing   /DEMO01/cancelled
 // Any other access key renders the default "shipped" state.
 // ---------------------------------------------------------------------------
-import type { OrderStatus, PublicOrder, Shipment } from '@/lib/types.ts'
+import type { OrderStatus, PublicCryptoPayment, PublicOrder, Shipment } from '@/lib/types.ts'
 
 const DEMO_REF = 'DEMO01'
 
@@ -25,6 +25,26 @@ const ORDER_STATUSES: OrderStatus[] = [
 
 export function isDemoRef(orderRef: string): boolean {
   return orderRef === DEMO_REF
+}
+
+const demoCryptoPayment: PublicCryptoPayment = {
+  paymentId: 1,
+  coin: 'USDT',
+  network: 'polygon',
+  coinLabel: 'USDT',
+  networkLabel: 'Polygon',
+  address: '0x4b3F1a2E9c7D6b8A5f0C2d1E3b4A5c6D7e8F9012',
+  coinAmount: '43.61',
+  fiatAmount: 43.44,
+  verificationStatus: 'checking',
+  needsAttention: false,
+  txidMasked: '0x9a3c…7f21',
+}
+
+/** Dev-only mock for submitCryptoTxid(); see fetchPublicOrder() above. */
+export async function demoCryptoTxid(): Promise<{ verificationStatus: string }> {
+  await new Promise((resolve) => setTimeout(resolve, 400))
+  return { verificationStatus: 'checking' }
 }
 
 export async function demoOrder(accessKey: string): Promise<PublicOrder> {
@@ -112,5 +132,6 @@ export async function demoOrder(accessKey: string): Promise<PublicOrder> {
       country: 'United Kingdom',
     },
     shipments,
+    cryptoPayments: [demoCryptoPayment],
   }
 }
